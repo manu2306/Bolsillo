@@ -233,7 +233,21 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 
 ### Sesión 2 · Etapa 0: preparación
 
-*(En curso)*
+**Qué pedí:** preparar la estructura del proyecto paso a paso: entorno virtual, librerías, `.gitignore`, `.env`, `.env.example` y primer commit.
+
+**Qué hizo la IA:**
+- Me guio en 6 pasos con comandos de PowerShell y una comprobación al final de cada uno.
+- Me avisó de no crear `.env` con `echo ... >` en PowerShell (codificación UTF-16 que python-dotenv no lee).
+- Ante cada resultado inesperado, me pidió la salida exacta antes de proponer causas.
+
+**Qué hice yo:**
+- Reorganicé este PROMPT-LOG con los prompts iniciales de diseño y desarrollo al principio.
+- Detecté que `.env.example` no aparecía en `git status`. Con la IA comprobamos que existía y no estaba ignorado: lo había guardado después de `git add .`. Lo resolví repitiendo `git add .`.
+- Hice el primer commit (`9d0524e`) con solo 4 archivos: `.env.example`, `.gitignore`, `PROMPT-LOG.md` y `requirements.txt`.
+- En el mini-reto, `git check-ignore -v .env` no devolvió nada y `git status` mostró `?? .env`: la clave había quedado desprotegida. Verifiqué con `git ls-files` que `.env` no estaba en el commit y lo corregí con `git restore .gitignore`.
+
+**Qué aprendí:** comprobar con `git check-ignore` y `git status` antes de cada commit. Si `.env` llega a un repositorio público, la clave queda en el historial aunque se borre después, y hay que revocarla.
+
 
 - Carpeta del proyecto, entorno virtual, librerías, `.gitignore`, `.env` y `.env.example`.
 - Comprobación con `git check-ignore` de que `.env` no se sube.
