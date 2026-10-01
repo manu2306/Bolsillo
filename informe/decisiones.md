@@ -19,6 +19,9 @@
 | API key en `.env`, fuera de GitHub | Si se publica, cualquiera puede usarla a mi costa. |
 | Límite de 20 consultas por IP y día, en memoria | Protege el gasto de Groq. Se reinicia cuando Render duerme el servidor: limitación documentada del MVP. |
 | Groq solo interpreta cifras ya calculadas | Evita que la IA invente números o haga cuentas mal. |
+| Solo se publica la carpeta `static/` | El diseño original, el informe y `.env` quedan fuera del alcance del navegador. |
+| Cada cambio lanza el aviso `bolsillo:cambio` y las pantallas se redibujan al recibirlo | Así el dashboard se actualiza al instante sin recargar la página. |
+| Todas las cuentas están en un solo archivo, `calculos.js` | Es fácil de revisar y demuestra que el servidor no calcula nada. |
 
 ## Decisiones sobre el diseño (sesión 1)
 
@@ -40,6 +43,16 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | `zoom` del diseño entre 1100 y 1439 px | El diseño mide 1440 px; así se reduce entero en lugar de partir las cifras. |
 | Menú móvil con CSS `:target` | Funciona sin JavaScript. |
 
+## Huecos del diseño resueltos con estilos existentes (etapas 4 y 5)
+
+| Hueco | Cómo se resolvió |
+|---|---|
+| No había formulario para crear o editar secciones fijas | Se reutiliza el bloque «Nueva sección» de Gastos variables dentro del marco de los diálogos, con un campo más: «Monto mensual». |
+| Solo había diálogo de borrar gasto (escritorio) y de borrar sección (móvil) | Un único diálogo con los dos estilos, usado en todos los borrados, también en Ingresos. |
+| No se indicaba el estado «motivo elegido» ni «lista vacía» | Colores de la etiqueta verde del diseño y un texto breve. |
+| El presupuesto de una sección | Es opcional; sin presupuesto la tarjeta muestra «—». |
+| Eliminar una sección fija | La borra de todos los meses, como dice el texto del diálogo del diseño. |
+
 ## Reparto del trabajo
 
 | Lo hizo la IA | Lo hice yo |
@@ -48,7 +61,3 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | Montar las páginas y verificarlas píxel a píxel. | Decidir las 5 cuestiones abiertas del diseño. |
 | Proponer comandos y explicar cada paso. | Ejecutar cada paso y comprobar los resultados. |
 | | Detectar los errores 2 y 4 y exigir confirmación antes de corregir. |
-
-| Solo se publica la carpeta `static/` | El diseño original, el informe y `.env` quedan fuera del alcance del navegador. |
-
-| Cada cambio lanza el aviso `bolsillo:cambio` y las pantallas se redibujan al recibirlo | Así el dashboard se actualiza al instante sin recargar la página. |

@@ -194,17 +194,24 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 ### 4 · Etapa 2: servidor mínimo
 - **Pedí:** un servidor FastAPI que solo sirva las páginas, sin cálculos ni almacenamiento.
 - **IA:** escribió `main.py` (20 líneas) con la ruta `/api/salud` y la carpeta `static/` publicada.
-- **Yo:** comprobé en el navegador que el Panel carga, que `/api/salud` responde y que `diseno/` e `informe/` no son accesibles (error 404).
+- **Yo:** comprobé en el navegador que el Panel carga, que `/api/salud` responde y que `diseno/` no es accesible (error 404).
 - **Resultado:** la app funciona en `http://127.0.0.1:8000`.
 
 ### 5 · Etapa 3: datos en el navegador
 - **Pedí:** guardar los datos en localStorage, sin servidor, y un selector de mes que funcione en todas las páginas.
 - **IA:** escribió `datos.js` (guardar, leer y validar) y `comun.js` (formato de euros y meses, selector de mes).
-- **Yo:** probé desde la consola que un ingreso guardado sobrevive a recargar la página y que el mes elegido se mantiene al cambiar de sección.
+- **Yo:** probé en la consola del navegador que las funciones responden bien y que el mes elegido se mantiene al cambiar de sección.
 - **Resultado:** el selector de mes funciona; los datos viven solo en el navegador del usuario.
 
 ### 6 · Etapa 4: Ingresos
 - **Pedí:** conectar la pantalla de Ingresos al diseño, sin rediseñarla.
 - **IA:** escribió `ingresos.js`, que clona las filas del diseño y cambia solo los textos; añadió validación del monto.
-- **Yo:** probé en el navegador añadir, editar y eliminar ingresos, y que siguen ahí tras recargar.
+- **Yo:** probé añadir, editar y eliminar ingresos, y que siguen ahí tras recargar.
 - **Resultado:** primera pantalla funcional con datos reales.
+
+### 7 · Etapa 5: Gastos fijos
+- **Pedí:** crear, editar y eliminar secciones de gastos fijos, con confirmación antes de borrar.
+- **IA:** escribió `gastos-fijos.js` y `calculos.js`; como el diseño no traía formulario para las secciones fijas, reutilizó el bloque «Nueva sección» dentro del marco de los diálogos.
+- **Yo:** probé el historial de importes: subir el alquiler en noviembre no cambia octubre.
+- **Resultado:** secciones fijas con historial por mes y diálogo de confirmación en todos los borrados.
+

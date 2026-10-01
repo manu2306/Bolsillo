@@ -161,8 +161,18 @@
 
   function eliminar(id) {
     const datos = Datos.cargar();
-    datos.ingresos = datos.ingresos.filter(function (i) { return i.id !== id; });
-    Datos.guardar(datos);
+    const ingreso = datos.ingresos.find(function (i) { return i.id === id; });
+    Comun.confirmar({
+      titulo: "¿Eliminar este ingreso?",
+      texto: "Se quitará de la lista y de los totales del mes. Esta acción no se puede deshacer.",
+      nombre: ingreso.concepto,
+      detalle: Comun.nombreMes(ingreso.mes) + (ingreso.motivo ? " · " + ingreso.motivo : ""),
+      monto: Comun.euros(ingreso.monto),
+    }).then(function (si) {
+      if (!si) return;
+      datos.ingresos = datos.ingresos.filter(function (i) { return i.id !== id; });
+      Datos.guardar(datos);
+    });
   }
 
   // ---------- Conexión de botones ----------

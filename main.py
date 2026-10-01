@@ -15,5 +15,15 @@ def salud():
     return {"estado": "ok"}
 
 
+class StaticSinCacheVieja(StaticFiles):
+    """Igual que StaticFiles, pero obliga al navegador a comprobar siempre
+    si hay una versión más nueva de cada archivo antes de usar su copia guardada."""
+
+    async def get_response(self, path, scope):
+        respuesta = await super().get_response(path, scope)
+        respuesta.headers["Cache-Control"] = "no-cache"
+        return respuesta
+
+
 # Sirve las páginas de la carpeta static. Va al final para no tapar las rutas /api.
-app.mount("/", StaticFiles(directory=CARPETA_STATIC, html=True), name="static")
+app.mount("/", StaticSinCacheVieja(directory=CARPETA_STATIC, html=True), name="static")

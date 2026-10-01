@@ -56,6 +56,40 @@ const Comun = (function () {
     return false;
   }
 
+  // Los 6 colores de sección que ofrece el diseño
+  const COLORES = ["rgb(15, 118, 110)", "rgb(59, 91, 146)", "rgb(122, 140, 196)",
+                   "rgb(179, 155, 107)", "rgb(142, 108, 138)", "rgb(94, 124, 138)"];
+
+  // Abre el diálogo de confirmación del diseño y espera la respuesta.
+  // Uso: Comun.confirmar({ titulo, texto, color, nombre, detalle, monto }).then(function (si) { ... })
+  function confirmar(opciones) {
+    const dialogos = Array.from(document.querySelectorAll('[data-dialogo="borrar"]'));
+    dialogos.forEach(function (dialogo) {
+      ["titulo", "texto", "nombre", "detalle", "monto"].forEach(function (parte) {
+        dialogo.querySelector('[data-d="' + parte + '"]').textContent = opciones[parte] || "";
+      });
+      const punto = dialogo.querySelector('[data-d="color"]');
+      punto.style.background = opciones.color || "";
+      punto.hidden = !opciones.color;
+      dialogo.hidden = false;
+    });
+    return new Promise(function (responder) {
+      function cerrar(respuesta) {
+        dialogos.forEach(function (d) { d.hidden = true; });
+        document.removeEventListener("click", alPulsar, true);
+        document.removeEventListener("keydown", alTeclear);
+        responder(respuesta);
+      }
+      function alPulsar(evento) {
+        if (evento.target.closest('[data-d="confirmar"]')) cerrar(true);
+        else if (evento.target.closest('[data-d="cancelar"]') || evento.target.matches('[data-dialogo="borrar"]')) cerrar(false);
+      }
+      function alTeclear(evento) { if (evento.key === "Escape") cerrar(false); }
+      document.addEventListener("click", alPulsar, true);
+      document.addEventListener("keydown", alTeclear);
+    });
+  }
+
   // Escribe el mes elegido en todos los selectores de mes de la página
   function pintarMes() {
     const texto = nombreMes(Datos.mes());
@@ -76,5 +110,5 @@ const Comun = (function () {
   document.addEventListener("bolsillo:cambio", pintarMes);
   document.addEventListener("DOMContentLoaded", pintarMes);
 
-  return { MESES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, vistas, marcarError };
+  return { MESES, COLORES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, vistas, marcarError, confirmar };
 })();
