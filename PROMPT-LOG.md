@@ -196,3 +196,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** escribió `main.py` (20 líneas) con la ruta `/api/salud` y la carpeta `static/` publicada.
 - **Yo:** comprobé en el navegador que el Panel carga, que `/api/salud` responde y que `diseno/` e `informe/` no son accesibles (error 404).
 - **Resultado:** la app funciona en `http://127.0.0.1:8000`.
+
+### 5 · Etapa 3: datos en el navegador
+- **Pedí:** guardar los datos en localStorage, sin servidor, y un selector de mes que funcione en todas las páginas.
+- **IA:** escribió `datos.js` (guardar, leer y validar) y `comun.js` (formato de euros y meses, selector de mes).
+- **Yo:** probé desde la consola que un ingreso guardado sobrevive a recargar la página y que el mes elegido se mantiene al cambiar de sección.
+- **Resultado:** el selector de mes funciona; los datos viven solo en el navegador del usuario.

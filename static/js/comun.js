@@ -26,6 +26,36 @@ const Comun = (function () {
     return (redondeado < 0 ? "−" : "") + conPuntos + (decimales ? "," + decimales : "") + " €";
   }
 
+  // Lee lo que el usuario escribe en un campo de monto: "1.800,50" -> 1800.5
+  // Devuelve null si no es un número mayor que cero.
+  function leerMonto(texto) {
+    let limpio = String(texto).replace(/[\s€]/g, "");
+    if (limpio.includes(",")) limpio = limpio.replace(/\./g, "").replace(",", ".");
+    else if (/^\d{1,3}(\.\d{3})+$/.test(limpio)) limpio = limpio.replace(/\./g, "");
+    if (!/^\d+(\.\d+)?$/.test(limpio)) return null;
+    const numero = Math.round(parseFloat(limpio) * 100) / 100;
+    return numero > 0 ? numero : null;
+  }
+
+  // 1800 -> "1.800,00" (para rellenar un campo al editar)
+  function montoParaCampo(cantidad) {
+    const [entera, decimales] = cantidad.toFixed(2).split(".");
+    return entera.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + decimales;
+  }
+
+  // Las dos maquetas de cada página (escritorio y móvil) se rellenan igual
+  function vistas() {
+    return Array.from(document.querySelectorAll(".vista-escritorio, .vista-movil"));
+  }
+
+  // Marca en rojo un campo mal rellenado y pone el cursor en él
+  function marcarError(campo) {
+    campo.style.borderColor = "#AE3A2E";
+    campo.focus();
+    campo.addEventListener("input", function () { campo.style.borderColor = ""; }, { once: true });
+    return false;
+  }
+
   // Escribe el mes elegido en todos los selectores de mes de la página
   function pintarMes() {
     const texto = nombreMes(Datos.mes());
@@ -46,5 +76,5 @@ const Comun = (function () {
   document.addEventListener("bolsillo:cambio", pintarMes);
   document.addEventListener("DOMContentLoaded", pintarMes);
 
-  return { MESES, nombreMes, moverMes, euros };
+  return { MESES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, vistas, marcarError };
 })();

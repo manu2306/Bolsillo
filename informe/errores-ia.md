@@ -13,3 +13,5 @@ Quién detectó cada error es la clave para el criterio «dirigir bien a la IA»
 
 - **Etapa 0:** `.env.example` no aparecía en `git status` porque lo guardé después de `git add .`. Se diagnosticó con `Get-ChildItem` y `git check-ignore`.
 - **Etapa 1:** al abrir las páginas con doble clic (`file:///`), Chrome muestra un aviso de seguridad al cerrar el menú móvil. Es una limitación de `file:///` y desaparece cuando el servidor sirve las páginas.
+
+- **Etapa 2:** marqué el paso como hecho sin abrir las páginas. La IA lo detectó porque el registro de uvicorn no tenía ninguna línea `GET`, y repetimos las comprobaciones.

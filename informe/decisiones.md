@@ -50,3 +50,5 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | | Detectar los errores 2 y 4 y exigir confirmación antes de corregir. |
 
 | Solo se publica la carpeta `static/` | El diseño original, el informe y `.env` quedan fuera del alcance del navegador. |
+
+| Cada cambio lanza el aviso `bolsillo:cambio` y las pantallas se redibujan al recibirlo | Así el dashboard se actualiza al instante sin recargar la página. |
