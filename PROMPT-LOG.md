@@ -202,3 +202,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** escribió `datos.js` (guardar, leer y validar) y `comun.js` (formato de euros y meses, selector de mes).
 - **Yo:** probé desde la consola que un ingreso guardado sobrevive a recargar la página y que el mes elegido se mantiene al cambiar de sección.
 - **Resultado:** el selector de mes funciona; los datos viven solo en el navegador del usuario.
+
+### 6 · Etapa 4: Ingresos
+- **Pedí:** conectar la pantalla de Ingresos al diseño, sin rediseñarla.
+- **IA:** escribió `ingresos.js`, que clona las filas del diseño y cambia solo los textos; añadió validación del monto.
+- **Yo:** probé en el navegador añadir, editar y eliminar ingresos, y que siguen ahí tras recargar.
+- **Resultado:** primera pantalla funcional con datos reales.
