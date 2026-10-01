@@ -190,3 +190,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** extrajo las 17 pantallas, montó 6 páginas con escritorio y móvil y verificó píxel a píxel contra el diseño.
 - **Yo:** probé en mi portátil y detecté cifras partidas en dos líneas; se corrigió reduciendo el diseño con `zoom`.
 - **Resultado:** 6 páginas idénticas al diseño, adaptadas de 360 a 1920 px.
+
+### 4 · Etapa 2: servidor mínimo
+- **Pedí:** un servidor FastAPI que solo sirva las páginas, sin cálculos ni almacenamiento.
+- **IA:** escribió `main.py` (20 líneas) con la ruta `/api/salud` y la carpeta `static/` publicada.
+- **Yo:** comprobé en el navegador que el Panel carga, que `/api/salud` responde y que `diseno/` e `informe/` no son accesibles (error 404).
+- **Resultado:** la app funciona en `http://127.0.0.1:8000`.
