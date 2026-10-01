@@ -69,6 +69,14 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | El eje del gráfico de barras se adapta al valor más alto | El diseño lo tenía fijo en 2.400 €; con otros ingresos las barras se saldrían. |
 | Los medidores solo aparecen para secciones con presupuesto | Sin tope no hay nada que medir. |
 
+## Exportar e importar (etapa 8)
+
+| Regla | Por qué |
+|---|---|
+| El archivo es JSON y se genera y se lee en el navegador | El servidor nunca ve los datos del usuario. |
+| Antes de aceptar un archivo se comprueba campo a campo | Un archivo dañado o de otro programa no puede romper la aplicación ni borrar los datos. |
+| Si ya hay datos, se pide confirmación antes de sustituirlos | Cargar un archivo reemplaza todo; es la única acción que puede hacer perder datos. |
+
 ## Reparto del trabajo
 
 | Lo hizo la IA | Lo hice yo |

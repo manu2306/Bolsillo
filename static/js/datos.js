@@ -10,16 +10,31 @@ const Datos = (function () {
     return { version: 1, ingresos: [], secciones: [], gastos: [] };
   }
 
-  // Comprueba que algo leído (de localStorage o de un archivo) tiene la forma correcta
+  // Comprueba que algo leído (de localStorage o de un archivo) tiene la forma correcta:
+  // las tres listas, y dentro de cada una los campos que la aplicación necesita.
   function sonValidos(d) {
-    return (
-      d !== null &&
-      typeof d === "object" &&
-      d.version === 1 &&
-      Array.isArray(d.ingresos) &&
-      Array.isArray(d.secciones) &&
-      Array.isArray(d.gastos)
-    );
+    if (d === null || typeof d !== "object" || d.version !== 1) return false;
+    if (!Array.isArray(d.ingresos) || !Array.isArray(d.secciones) || !Array.isArray(d.gastos)) return false;
+
+    const texto = function (v) { return typeof v === "string" && v !== ""; };
+    const monto = function (v) { return typeof v === "number" && isFinite(v) && v >= 0; };
+    const mes = function (v) { return typeof v === "string" && /^\d{4}-\d{2}$/.test(v); };
+
+    const ingresosBien = d.ingresos.every(function (i) {
+      return i && texto(i.id) && mes(i.mes) && texto(i.concepto) && monto(i.monto) && typeof i.motivo === "string";
+    });
+    const seccionesBien = d.secciones.every(function (s) {
+      if (!s || !texto(s.id) || !texto(s.nombre) || !monto(s.presupuesto) || !texto(s.color)) return false;
+      if (s.tipo === "variable") return true;
+      return s.tipo === "fijo" && Array.isArray(s.montos) && s.montos.length > 0 &&
+        s.montos.every(function (m) { return m && mes(m.desde) && monto(m.monto); });
+    });
+    const ids = d.secciones.map(function (s) { return s && s.id; });
+    const gastosBien = d.gastos.every(function (g) {
+      return g && texto(g.id) && typeof g.fecha === "string" && /^\d{4}-\d{2}-\d{2}$/.test(g.fecha) &&
+        monto(g.monto) && typeof g.nota === "string" && ids.includes(g.seccionId); // el gasto apunta a una sección que existe
+    });
+    return ingresosBien && seccionesBien && gastosBien;
   }
 
   // Lee los datos guardados. Si no hay nada o están dañados, devuelve datos vacíos.

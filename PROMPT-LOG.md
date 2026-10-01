@@ -226,3 +226,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** reunió todas las cuentas en `calculos.js` y escribió `panel.js`, que solo dibuja; cargó los datos de ejemplo del diseño y comparó el resultado con el diseño original píxel a píxel.
 - **Yo:** comprobé que las cifras del Panel coinciden con lo que había apuntado en Ingresos y Gastos, y que cambian al instante al cambiar de mes.
 - **Resultado:** tarjetas, anillo, barras de 6 y 12 meses, medidores y tabla comparativa funcionando.
+
+### 10 · Etapa 8: Exportar e importar
+- **Pedí:** descargar los datos como archivo y volver a cargarlos, sin servidor.
+- **IA:** escribió `exportar.js`; el archivo se valida campo a campo antes de aceptarlo y, si ya hay datos, pide confirmación antes de sustituirlos.
+- **Yo:** probé a cargar un archivo que no era de Bolsillo y comprobé que mis datos no cambiaban.
+- **Resultado:** los datos se pueden llevar de un navegador a otro. Añadido `ejemplo/bolsillo-datos-ejemplo.json` para la demostración.

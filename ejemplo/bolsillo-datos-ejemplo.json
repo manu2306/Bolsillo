@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "ingresos": [
+    {
+      "id": "i2025-04",
+      "mes": "2025-11",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-05",
+      "mes": "2025-12",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-06",
+      "mes": "2026-01",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-07",
+      "mes": "2026-02",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-08",
+      "mes": "2026-03",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-09",
+      "mes": "2026-04",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-10",
+      "mes": "2026-05",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-11",
+      "mes": "2026-06",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2025-12",
+      "mes": "2026-07",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i2026-01",
+      "mes": "2026-08",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i02",
+      "mes": "2026-09",
+      "concepto": "Nómina",
+      "monto": 1800,
+      "motivo": ""
+    },
+    {
+      "id": "i03",
+      "mes": "2026-10",
+      "concepto": "Trabajo extra",
+      "monto": 2300,
+      "motivo": "Extra"
+    }
+  ],
+  "secciones": [
+    {
+      "id": "f0",
+      "nombre": "Alquiler",
+      "tipo": "fijo",
+      "presupuesto": 750,
+      "color": "rgb(15, 118, 110)",
+      "montos": [
+        {
+          "desde": "2025-11",
+          "monto": 650
+        }
+      ]
+    },
+    {
+      "id": "f1",
+      "nombre": "Internet",
+      "tipo": "fijo",
+      "presupuesto": 50,
+      "color": "rgb(42, 157, 143)",
+      "montos": [
+        {
+          "desde": "2025-11",
+          "monto": 30
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "nombre": "Gimnasio",
+      "tipo": "fijo",
+      "presupuesto": 60,
+      "color": "rgb(111, 194, 182)",
+      "montos": [
+        {
+          "desde": "2025-11",
+          "monto": 35
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "nombre": "Seguro",
+      "tipo": "fijo",
+      "presupuesto": 75,
+      "color": "rgb(168, 218, 210)",
+      "montos": [
+        {
+          "desde": "2025-11",
+          "monto": 45
+        }
+      ]
+    },
+    {
+      "id": "v0",
+      "nombre": "Comida",
+      "tipo": "variable",
+      "presupuesto": 350,
+      "color": "rgb(59, 91, 146)"
+    },
+    {
+      "id": "v1",
+      "nombre": "Salidas",
+      "tipo": "variable",
+      "presupuesto": 125,
+      "color": "rgb(122, 140, 196)"
+    },
+    {
+      "id": "v2",
+      "nombre": "Transporte",
+      "tipo": "variable",
+      "presupuesto": 100,
+      "color": "rgb(179, 155, 107)"
+    },
+    {
+      "id": "v3",
+      "nombre": "Imprevistos",
+      "tipo": "variable",
+      "presupuesto": 150,
+      "color": "rgb(142, 108, 138)"
+    }
+  ],
+  "gastos": [
+    {
+      "id": "g0",
+      "fecha": "2025-11-10",
+      "seccionId": "v0",
+      "monto": 410,
+      "nota": ""
+    },
+    {
+      "id": "g1",
+      "fecha": "2025-12-10",
+      "seccionId": "v0",
+      "monto": 450,
+      "nota": ""
+    },
+    {
+      "id": "g2",
+      "fecha": "2026-01-10",
+      "seccionId": "v0",
+      "monto": 430,
+      "nota": ""
+    },
+    {
+      "id": "g3",
+      "fecha": "2026-02-10",
+      "seccionId": "v0",
+      "monto": 500,
+      "nota": ""
+    },
+    {
+      "id": "g4",
+      "fecha": "2026-03-10",
+      "seccionId": "v0",
+      "monto": 570,
+      "nota": ""
+    },
+    {
+      "id": "g5",
+      "fecha": "2026-04-10",
+      "seccionId": "v0",
+      "monto": 400,
+      "nota": ""
+    },
+    {
+      "id": "g6",
+      "fecha": "2026-05-10",
+      "seccionId": "v0",
+      "monto": 420,
+      "nota": ""
+    },
+    {
+      "id": "g7",
+      "fecha": "2026-06-10",
+      "seccionId": "v0",
+      "monto": 390,
+      "nota": ""
+    },
+    {
+      "id": "g8",
+      "fecha": "2026-07-10",
+      "seccionId": "v0",
+      "monto": 660,
+      "nota": ""
+    },
+    {
+      "id": "g9",
+      "fecha": "2026-08-10",
+      "seccionId": "v0",
+      "monto": 480,
+      "nota": ""
+    },
+    {
+      "id": "g10",
+      "fecha": "2026-09-12",
+      "seccionId": "v0",
+      "monto": 250,
+      "nota": ""
+    },
+    {
+      "id": "g11",
+      "fecha": "2026-09-12",
+      "seccionId": "v1",
+      "monto": 80,
+      "nota": ""
+    },
+    {
+      "id": "g12",
+      "fecha": "2026-09-12",
+      "seccionId": "v2",
+      "monto": 65,
+      "nota": ""
+    },
+    {
+      "id": "g13",
+      "fecha": "2026-09-12",
+      "seccionId": "v3",
+      "monto": 40,
+      "nota": ""
+    },
+    {
+      "id": "g14",
+      "fecha": "2026-10-27",
+      "seccionId": "v0",
+      "monto": 48,
+      "nota": "Supermercado"
+    },
+    {
+      "id": "g15",
+      "fecha": "2026-10-21",
+      "seccionId": "v1",
+      "monto": 57,
+      "nota": "Concierto"
+    },
+    {
+      "id": "g16",
+      "fecha": "2026-10-20",
+      "seccionId": "v0",
+      "monto": 58,
+      "nota": "Supermercado"
+    },
+    {
+      "id": "g17",
+      "fecha": "2026-10-18",
+      "seccionId": "v0",
+      "monto": 38,
+      "nota": "Mercado"
+    },
+    {
+      "id": "g18",
+      "fecha": "2026-10-16",
+      "seccionId": "v2",
+      "monto": 20,
+      "nota": "Taxi"
+    },
+    {
+      "id": "g19",
+      "fecha": "2026-10-14",
+      "seccionId": "v1",
+      "monto": 18,
+      "nota": "Cine"
+    },
+    {
+      "id": "g20",
+      "fecha": "2026-10-11",
+      "seccionId": "v0",
+      "monto": 64,
+      "nota": "Supermercado"
+    },
+    {
+      "id": "g21",
+      "fecha": "2026-10-09",
+      "seccionId": "v3",
+      "monto": 90,
+      "nota": "Reparación del móvil"
+    },
+    {
+      "id": "g22",
+      "fecha": "2026-10-07",
+      "seccionId": "v1",
+      "monto": 45,
+      "nota": "Cena con amigos"
+    },
+    {
+      "id": "g23",
+      "fecha": "2026-10-04",
+      "seccionId": "v0",
+      "monto": 72,
+      "nota": "Supermercado"
+    },
+    {
+      "id": "g24",
+      "fecha": "2026-10-02",
+      "seccionId": "v2",
+      "monto": 40,
+      "nota": "Abono de transporte"
+    }
+  ]
+}

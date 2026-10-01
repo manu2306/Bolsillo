@@ -116,6 +116,8 @@ const Comun = (function () {
       const punto = dialogo.querySelector('[data-d="color"]');
       punto.style.background = opciones.color || "";
       punto.hidden = !opciones.color;
+      // El botón dice "Sí, eliminar" salvo que se pida otro texto
+      dialogo.querySelector('[data-d="confirmar"] span').textContent = opciones.boton || "Sí, eliminar";
       dialogo.hidden = false;
     });
     return new Promise(function (responder) {
