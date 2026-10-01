@@ -23,5 +23,17 @@ const Calculos = (function () {
     return datos.secciones.filter(function (s) { return s.tipo === "fijo" && montoFijo(s, mes) !== null; });
   }
 
-  return { sumar, montoFijo, fijasDelMes };
+  // Secciones variables (existen en todos los meses)
+  function variables(datos) {
+    return datos.secciones.filter(function (s) { return s.tipo === "variable"; });
+  }
+
+  // Gastos variables de un mes, del más reciente al más antiguo
+  function gastosDelMes(datos, mes) {
+    return datos.gastos
+      .filter(function (g) { return g.fecha.startsWith(mes); })
+      .sort(function (a, b) { return b.fecha.localeCompare(a.fecha); });
+  }
+
+  return { sumar, montoFijo, fijasDelMes, variables, gastosDelMes };
 })();

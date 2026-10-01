@@ -21,6 +21,7 @@
 | Groq solo interpreta cifras ya calculadas | Evita que la IA invente números o haga cuentas mal. |
 | Solo se publica la carpeta `static/` | El diseño original, el informe y `.env` quedan fuera del alcance del navegador. |
 | Cada cambio lanza el aviso `bolsillo:cambio` y las pantallas se redibujan al recibirlo | Así el dashboard se actualiza al instante sin recargar la página. |
+| El servidor obliga al navegador a comprobar si hay archivos nuevos (`Cache-Control: no-cache`) | Tras una actualización nadie se queda con una mezcla de archivos viejos y nuevos. |
 | Todas las cuentas están en un solo archivo, `calculos.js` | Es fácil de revisar y demuestra que el servidor no calcula nada. |
 
 ## Decisiones sobre el diseño (sesión 1)
@@ -52,6 +53,10 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | No se indicaba el estado «motivo elegido» ni «lista vacía» | Colores de la etiqueta verde del diseño y un texto breve. |
 | El presupuesto de una sección | Es opcional; sin presupuesto la tarjeta muestra «—». |
 | Eliminar una sección fija | La borra de todos los meses, como dice el texto del diálogo del diseño. |
+| El diseño no permitía editar ni eliminar secciones variables | Botón «Editar sección», copia del de «Crear sección nueva», que abre el mismo bloque con una papelera. |
+| Eliminar una sección variable | Borra también sus gastos de todos los meses; el diálogo avisa de cuántos son. |
+| Un gasto con fecha de otro mes | Se guarda en su mes y la pantalla salta a ese mes para que se vea. |
+| La fecha se escribe a mano | Admite «27/03/2026», «27/3» o solo «27»; lo que falta se toma del mes elegido. |
 
 ## Reparto del trabajo
 

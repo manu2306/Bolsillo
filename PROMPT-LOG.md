@@ -215,3 +215,8 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **Yo:** probé el historial de importes: subir el alquiler en noviembre no cambia octubre.
 - **Resultado:** secciones fijas con historial por mes y diálogo de confirmación en todos los borrados.
 
+### 8 · Etapa 6: Gastos variables
+- **Pedí:** anotar gastos variables, crear secciones y poder corregir y borrar, con confirmación.
+- **IA:** escribió `gastos-variables.js`; añadió el botón «Editar sección» porque el diseño no dejaba editar ni eliminar secciones variables; corrigió un defecto del propio diseño en móvil.
+- **Yo:** detecté con el error exacto de la consola que el navegador usaba un archivo antiguo en caché; se corrigió en `main.py`.
+- **Resultado:** las tres pantallas de entrada de datos (Ingresos, Gastos fijos y Gastos variables) funcionan.

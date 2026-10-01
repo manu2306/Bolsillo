@@ -26,6 +26,40 @@ const Comun = (function () {
     return (redondeado < 0 ? "−" : "") + conPuntos + (decimales ? "," + decimales : "") + " €";
   }
 
+  // "2026-03-27" -> "27 mar"
+  function fechaCorta(fecha) {
+    const [, mes, dia] = fecha.split("-").map(Number);
+    return dia + " " + MESES[mes - 1].slice(0, 3).toLowerCase();
+  }
+
+  // "2026-03-27" -> "27/03/2026" (para rellenar un campo)
+  function fechaParaCampo(fecha) {
+    const [anio, mes, dia] = fecha.split("-");
+    return dia + "/" + mes + "/" + anio;
+  }
+
+  // Lee una fecha escrita como "27/03/2026", "27/3" o "27": lo que falte se toma del mes elegido.
+  // Devuelve "2026-03-27", o null si la fecha no existe.
+  function leerFecha(texto, mesElegido) {
+    const partes = String(texto).trim().split(/[\/\-. ]+/).filter(Boolean).map(Number);
+    if (partes.length < 1 || partes.length > 3 || partes.some(isNaN)) return null;
+    const [anioElegido, numeroMes] = mesElegido.split("-").map(Number);
+    const dia = partes[0];
+    const mes = partes[1] || numeroMes;
+    let anio = partes[2] || anioElegido;
+    if (anio < 100) anio += 2000;
+    const fecha = new Date(anio, mes - 1, dia);
+    if (fecha.getFullYear() !== anio || fecha.getMonth() !== mes - 1 || fecha.getDate() !== dia) return null;
+    return anio + "-" + String(mes).padStart(2, "0") + "-" + String(dia).padStart(2, "0");
+  }
+
+  // Fecha de hoy si cae en el mes elegido; si no, el día 1 de ese mes
+  function fechaPorDefecto(mesElegido) {
+    const hoy = new Date();
+    const hoyTexto = hoy.getFullYear() + "-" + String(hoy.getMonth() + 1).padStart(2, "0") + "-" + String(hoy.getDate()).padStart(2, "0");
+    return hoyTexto.startsWith(mesElegido) ? hoyTexto : mesElegido + "-01";
+  }
+
   // Lee lo que el usuario escribe en un campo de monto: "1.800,50" -> 1800.5
   // Devuelve null si no es un número mayor que cero.
   function leerMonto(texto) {
@@ -110,5 +144,5 @@ const Comun = (function () {
   document.addEventListener("bolsillo:cambio", pintarMes);
   document.addEventListener("DOMContentLoaded", pintarMes);
 
-  return { MESES, COLORES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, vistas, marcarError, confirmar };
+  return { MESES, COLORES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, fechaCorta, fechaParaCampo, leerFecha, fechaPorDefecto, vistas, marcarError, confirmar };
 })();
