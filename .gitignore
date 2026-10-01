@@ -1,0 +1,12 @@
+# Entorno virtual: se recrea con requirements.txt
+.venv/
+
+# Secretos: la API key de Groq NUNCA sube a GitHub
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Configuración personal de VS Code
+.vscode/
