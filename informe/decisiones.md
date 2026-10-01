@@ -58,6 +58,17 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | Un gasto con fecha de otro mes | Se guarda en su mes y la pantalla salta a ese mes para que se vea. |
 | La fecha se escribe a mano | Admite «27/03/2026», «27/3» o solo «27»; lo que falta se toma del mes elegido. |
 
+## Reglas del Panel (etapa 7)
+
+| Regla | Por qué |
+|---|---|
+| `calculos.js` hace las cuentas y `panel.js` solo dibuja | El mismo resumen calculado es el que se enviará al Analista IA: la IA nunca calcula. |
+| El estado vacío aparece mientras no haya ningún ingreso | Es lo que dice el texto del diseño: «Añada su primer ingreso para empezar». |
+| Gastar más que el mes anterior se muestra en rojo con flecha arriba; gastar menos, en verde con flecha abajo | El diseño solo dibujó el caso rojo; el verde usa los colores de la etiqueta «−7,7 %» de su tabla. |
+| Si el mes anterior no tiene gastos, la variación muestra «—» | No se puede calcular un porcentaje sobre cero, y no se inventa. |
+| El eje del gráfico de barras se adapta al valor más alto | El diseño lo tenía fijo en 2.400 €; con otros ingresos las barras se saldrían. |
+| Los medidores solo aparecen para secciones con presupuesto | Sin tope no hay nada que medir. |
+
 ## Reparto del trabajo
 
 | Lo hizo la IA | Lo hice yo |

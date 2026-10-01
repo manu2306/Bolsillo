@@ -26,6 +26,17 @@ const Comun = (function () {
     return (redondeado < 0 ? "−" : "") + conPuntos + (decimales ? "," + decimales : "") + " €";
   }
 
+  // 9.6 -> "+9,6 %"   -7.7 -> "−7,7 %"   0 -> "0,0 %"
+  function porcentaje(valor) {
+    const signo = valor > 0 ? "+" : (valor < 0 ? "−" : "");
+    return signo + Math.abs(valor).toFixed(1).replace(".", ",") + "\u00A0%";
+  }
+
+  // "2026-03" -> "marzo"
+  function mesEnMinusculas(mes) {
+    return MESES[Number(mes.split("-")[1]) - 1].toLowerCase();
+  }
+
   // "2026-03-27" -> "27 mar"
   function fechaCorta(fecha) {
     const [, mes, dia] = fecha.split("-").map(Number);
@@ -144,5 +155,5 @@ const Comun = (function () {
   document.addEventListener("bolsillo:cambio", pintarMes);
   document.addEventListener("DOMContentLoaded", pintarMes);
 
-  return { MESES, COLORES, nombreMes, moverMes, euros, leerMonto, montoParaCampo, fechaCorta, fechaParaCampo, leerFecha, fechaPorDefecto, vistas, marcarError, confirmar };
+  return { MESES, COLORES, porcentaje, mesEnMinusculas, nombreMes, moverMes, euros, leerMonto, montoParaCampo, fechaCorta, fechaParaCampo, leerFecha, fechaPorDefecto, vistas, marcarError, confirmar };
 })();

@@ -220,3 +220,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** escribió `gastos-variables.js`; añadió el botón «Editar sección» porque el diseño no dejaba editar ni eliminar secciones variables; corrigió un defecto del propio diseño en móvil.
 - **Yo:** detecté con el error exacto de la consola que el navegador usaba un archivo antiguo en caché; se corrigió en `main.py`.
 - **Resultado:** las tres pantallas de entrada de datos (Ingresos, Gastos fijos y Gastos variables) funcionan.
+
+### 9 · Etapa 7: Panel
+- **Pedí:** que el Panel muestre mis datos reales con todos los cálculos hechos en el navegador.
+- **IA:** reunió todas las cuentas en `calculos.js` y escribió `panel.js`, que solo dibuja; cargó los datos de ejemplo del diseño y comparó el resultado con el diseño original píxel a píxel.
+- **Yo:** comprobé que las cifras del Panel coinciden con lo que había apuntado en Ingresos y Gastos, y que cambian al instante al cambiar de mes.
+- **Resultado:** tarjetas, anillo, barras de 6 y 12 meses, medidores y tabla comparativa funcionando.
