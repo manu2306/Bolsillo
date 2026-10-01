@@ -1,29 +1,16 @@
 # PROMPT-LOG · Bolsillo
 
-Memoria de las sesiones de trabajo con agentes de IA durante el desarrollo del MVP.
+Memoria breve de las sesiones con IA. El detalle para el informe final está en [`informe/`](informe/).
 
-## Índice
+## Prompts iniciales
 
-- [Parte 1 · Prompts iniciales](#parte-1--prompts-iniciales)
-  - [1.1 Prompt de diseño (Claude Design → frontend)](#11-prompt-de-diseño-claude-design--frontend)
-  - [1.2 Prompt de desarrollo (profesor de programación)](#12-prompt-de-desarrollo-profesor-de-programación)
-- [Parte 2 · Sesiones de trabajo](#parte-2--sesiones-de-trabajo)
-  - [Sesión 1 · Análisis del diseño y plan](#sesión-1--análisis-del-diseño-y-plan)
-  - [Sesión 2 · Etapa 0: preparación](#sesión-2--etapa-0-preparación)
+| | Herramienta y modelo | Objetivo |
+|---|---|---|
+| Diseño | Claude Design · Claude Opus 5.5 (`claude-opus-5-5`) | Diseñar todas las pantallas (escritorio y móvil) antes de programar. |
+| Desarrollo | Claude · Claude Opus 5.5 (`claude-opus-5-5`) | Que la IA me guíe paso a paso como profesor, respetando mi arquitectura. |
 
----
-
-## Parte 1 · Prompts iniciales
-
-### 1.1 Prompt de diseño (Claude Design → frontend)
-
-**Herramienta y modelo:** Claude Design, modelo **Claude Opus 5.5** (identificador: `claude-opus-5-5`). Es la IA que diseñó la interfaz.
-
-**Objetivo**
-
-Obtener el diseño visual completo de Bolsillo (todas las pantallas, en escritorio y móvil) antes de escribir código, para que el desarrollo partiera de una interfaz cerrada y no se improvisara el diseño sobre la marcha.
-
-**Prompt completo (tal cual)**
+<details>
+<summary>Prompt de diseño (completo, tal cual)</summary>
 
 ```text
 <rol>
@@ -90,28 +77,10 @@ Incluye también estos estados: diálogo de confirmación antes de borrar una se
 <incorrecto>Tablas densas sin espacio entre filas.</incorrecto>
 </ejemplos>
 ```
+</details>
 
-**Resultado: qué entregó**
-
-- Un único archivo `Design.html`: una exportación empaquetada que contiene **17 pantallas** en maquetas separadas.
-  - **Escritorio (8):** Panel, Ingresos, Gastos fijos, Gastos variables, Analista IA, Exportar/Importar, Diálogo de borrar gasto y Estado vacío.
-  - **Móvil (9):** Panel, Menú abierto, Ingresos, Gastos fijos, Gastos variables, Analista IA, Exportar/Importar, Diálogo de borrar sección y Estado vacío.
-- Usa los datos de ejemplo pedidos (marzo frente a febrero, 2.300 € de ingreso, 1.310 € de gastos, 990 € de sobrante) y genera valores ficticios para los demás meses y los presupuestos, como se autorizó.
-- Respeta las restricciones: tratamiento de usted, color principal teal y verde/amarillo/rojo solo en estados de presupuesto y variación.
-- **Observaciones técnicas detectadas al revisarlo en la Sesión 1:**
-  - Los estilos van escritos dentro de cada etiqueta y las versiones de escritorio y móvil son maquetas de ancho fijo, sin adaptación automática al tamaño de pantalla.
-  - Incluye un motor propio de la herramienta de diseño y las fuentes (Manrope) incrustadas.
-  - No incluye estados de carga, error ni de límite de consultas del Analista IA, porque no se pidieron en el prompt.
-
-### 1.2 Prompt de desarrollo (profesor de programación)
-
-**Herramienta y modelo:** Claude, modelo **Claude Opus 5.5** (identificador: `claude-opus-5-5`). Es la IA que me guía y escribe el código del proyecto.
-
-**Objetivo**
-
-Usar la IA como profesor que me guía paso a paso para conectar el diseño y construir el MVP, de forma que yo entienda y pueda defender cada decisión, en lugar de recibir el proyecto hecho.
-
-**Prompt completo (tal cual)**
+<details>
+<summary>Prompt de desarrollo (completo, tal cual)</summary>
 
 ```text
 <rol>
@@ -201,54 +170,23 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 <incorrecto>Dar comandos de Linux o macOS en lugar de PowerShell.</incorrecto>
 </ejemplos>
 ```
+</details>
 
-**Por qué lo estructuré así**
+## Sesiones
 
-- **Rol:** le pedí que actuara como profesor, con trato de usted y tono paciente, para que explicara en lugar de solo entregar código.
-- **Sobre mí y proyecto:** le di mi nivel, mis herramientas (Windows, PowerShell, VS Code) y los requisitos del curso para que adaptara las explicaciones y no diera comandos que no puedo usar.
-- **Arquitectura:** fijé de antemano las decisiones técnicas (cálculos en el navegador, servidor mínimo, API key protegida, límite de consultas) para que la IA no las cambiara y yo pudiera defenderlas.
-- **Método:** le obligué a avanzar paso a paso y a esperar mi «listo, entendí», para mantener el control y comprobar cada paso antes de seguir.
-- **Restricciones:** prohibí cálculos en Python, almacenamiento en el servidor y comandos de Linux o macOS, y le pedí que preguntara antes de inventar.
-- **Ejemplos:** añadí ejemplos correctos e incorrectos para que la IA tuviera claro qué comportamiento esperaba.
+### 1 · Análisis del diseño y plan
+- **Pedí:** revisar el diseño, decir qué datos y endpoints hacen falta y proponer un plan por etapas.
+- **IA:** detectó que el diseño era una exportación empaquetada de 17 pantallas; propuso 3 endpoints y 5 preguntas.
+- **Yo:** decidí las 5 cuestiones abiertas (ver [`informe/decisiones.md`](informe/decisiones.md)).
 
----
+### 2 · Etapa 0: preparación
+- **Pedí:** entorno virtual, librerías, `.gitignore`, `.env` y primer commit.
+- **IA:** me guio paso a paso con PowerShell.
+- **Yo:** detecté que `.env` quedó desprotegido en el mini-reto y lo corregí con `git restore` antes de ningún commit.
+- **Resultado:** commit `9d0524e`, con la API key fuera del repositorio.
 
-## Parte 2 · Sesiones de trabajo
-
-### Sesión 1 · Análisis del diseño y plan
-
-**Qué pedí:** que la IA revisara el HTML del diseño, identificara qué datos y endpoints hacen falta según mi arquitectura y propusiera un plan por etapas, sin empezar a programar.
-
-**Qué hizo la IA:**
-- Detectó que el HTML era una exportación empaquetada (17 pantallas, estilos en línea, maquetas separadas de escritorio y móvil) y no una página única.
-- Propuso 3 endpoints: `GET /` (páginas), `POST /api/analista` y `GET /api/salud` (para despertar Render).
-- Me planteó 5 preguntas sobre huecos del diseño antes de empezar.
-
-**Qué decidí yo:**
-1. Una página por sección con las maquetas de escritorio y móvil, alternadas por CSS (sin rediseñar).
-2. Ingresos ilimitados por mes (se suman).
-3. Gastos fijos con historial: un cambio de importe solo afecta desde ese mes en adelante.
-4. Estados no dibujados (cargando, límite, error, vacíos) con estilos ya existentes en el diseño.
-5. El Panel muestra el concepto que escribe el usuario.
-
-### Sesión 2 · Etapa 0: preparación
-
-**Qué pedí:** preparar la estructura del proyecto paso a paso: entorno virtual, librerías, `.gitignore`, `.env`, `.env.example` y primer commit.
-
-**Qué hizo la IA:**
-- Me guio en 6 pasos con comandos de PowerShell y una comprobación al final de cada uno.
-- Me avisó de no crear `.env` con `echo ... >` en PowerShell (codificación UTF-16 que python-dotenv no lee).
-- Ante cada resultado inesperado, me pidió la salida exacta antes de proponer causas.
-
-**Qué hice yo:**
-- Reorganicé este PROMPT-LOG con los prompts iniciales de diseño y desarrollo al principio.
-- Detecté que `.env.example` no aparecía en `git status`. Con la IA comprobamos que existía y no estaba ignorado: lo había guardado después de `git add .`. Lo resolví repitiendo `git add .`.
-- Hice el primer commit (`9d0524e`) con solo 4 archivos: `.env.example`, `.gitignore`, `PROMPT-LOG.md` y `requirements.txt`.
-- En el mini-reto, `git check-ignore -v .env` no devolvió nada y `git status` mostró `?? .env`: la clave había quedado desprotegida. Verifiqué con `git ls-files` que `.env` no estaba en el commit y lo corregí con `git restore .gitignore`.
-
-**Qué aprendí:** comprobar con `git check-ignore` y `git status` antes de cada commit. Si `.env` llega a un repositorio público, la clave queda en el historial aunque se borre después, y hay que revocarla.
-
-
-- Carpeta del proyecto, entorno virtual, librerías, `.gitignore`, `.env` y `.env.example`.
-- Comprobación con `git check-ignore` de que `.env` no se sube.
-- Organicé este PROMPT-LOG: añadí los dos prompts iniciales (diseño y desarrollo) al principio, copiados sin cambios.
+### 3 · Etapa 1: diseño a páginas HTML
+- **Pedí:** convertir el diseño en páginas reales sin rediseñarlo.
+- **IA:** extrajo las 17 pantallas, montó 6 páginas con escritorio y móvil y verificó píxel a píxel contra el diseño.
+- **Yo:** probé en mi portátil y detecté cifras partidas en dos líneas; se corrigió reduciendo el diseño con `zoom`.
+- **Resultado:** 6 páginas idénticas al diseño, adaptadas de 360 a 1920 px.
