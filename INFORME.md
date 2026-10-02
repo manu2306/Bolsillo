@@ -1,6 +1,7 @@
 # Informe de reflexión · Bolsillo
 
-**Proyecto:** Bolsillo, un organizador de gastos personales con analista de IA.
+**Proyecto:** Bolsillo, un organizador de gastos personales con analista de IA.  
+**Aplicación:** https://bolsillo.onrender.com  
 **Repositorio:** https://github.com/manu2306/Bolsillo
 
 ## 1. Cómo trabajé con la IA

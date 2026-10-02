@@ -2,7 +2,9 @@
 
 Organizador de gastos personales con analista de IA. Trabajo final del curso de *vibe coding*: un MVP desarrollado dirigiendo a un agente de IA.
 
-**Aplicación desplegada:** *(enlace de Render pendiente de añadir)*
+**Aplicación desplegada:** https://bolsillo.onrender.com
+
+> El servidor gratuito se duerme tras 15 minutos sin visitas: la primera carga puede tardar hasta un minuto.
 
 ![El Panel de Bolsillo: a la izquierda el diseño original, a la derecha la aplicación con los mismos datos](docs/capturas/panel-diseno-y-app.png)
 

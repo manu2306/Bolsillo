@@ -250,3 +250,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** redactó `README.md` e `INFORME.md` y retiró la carpeta de notas.
 - **Yo:** revisé y ajusté los textos antes de publicarlos.
 
+### 14 · Despliegue en Render
+- **Pedí:** publicar la aplicación con un enlace público.
+- **IA:** me dio la configuración de Render (comandos de instalación y de arranque) y comprobó desde fuera que el enlace responde y que `.env` no es accesible.
+- **Yo:** creé el servicio en Render, añadí la clave de Groq como variable de entorno y probé la aplicación publicada.
+- **Resultado:** https://bolsillo.onrender.com
+
