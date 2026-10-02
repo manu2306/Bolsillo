@@ -7,7 +7,7 @@
 - **Cómo se aplica:** JavaScript calcula los totales y las variaciones y envía a Groq solo un resumen. Si el usuario pide un cálculo que no está en ese resumen, Groq responde con un mensaje fijo de «versión MVP».
 - **Por qué es buena para la presentación:** se ve en la demo, es una decisión de diseño y no de código, y muestra que sé dónde no confiar en la IA.
 
-(Se confirmará cuando el Analista IA esté funcionando.)
+Confirmada: el Analista IA ya funciona así.
 
 ## Arquitectura (fijada en el prompt inicial)
 
@@ -76,6 +76,23 @@ Ninguno cambia el aspecto: a 1440 px las páginas son idénticas al diseño, con
 | El archivo es JSON y se genera y se lee en el navegador | El servidor nunca ve los datos del usuario. |
 | Antes de aceptar un archivo se comprueba campo a campo | Un archivo dañado o de otro programa no puede romper la aplicación ni borrar los datos. |
 | Si ya hay datos, se pide confirmación antes de sustituirlos | Cargar un archivo reemplaza todo; es la única acción que puede hacer perder datos. |
+
+## Analista IA (etapas 9 y 10)
+
+| Regla | Por qué |
+|---|---|
+| Modelo `openai/gpt-oss-120b`, con `openai/gpt-oss-20b` de reserva | Es de la lista de producción de Groq, está en el plan gratuito y redacta bien en español. Si falla, se prueba el de reserva. |
+| El navegador envía un resumen con todas las diferencias ya calculadas | La IA no tiene que restar ni dividir: solo interpreta. |
+| Las cantidades se envían ya escritas como texto («1.200 €», «+9,6 %») | La IA las copia tal cual: no puede equivocarse al dar formato ni al redondear. |
+| El resumen del mes se pide en formato JSON con 3 observaciones | Así la pantalla puede numerarlas como en el diseño; si la IA no obedece, el servidor parte el texto por frases. |
+| Las reglas de la IA están en el servidor, no en el navegador | El usuario no puede cambiarlas, y su pregunta se trata solo como una pregunta. |
+| Si no hay datos en el mes, se responde sin llamar a Groq | No se gasta una de las 20 consultas diarias. |
+| La pantalla avisa si el servidor tarda | En Render el servidor se duerme tras 15 minutos sin visitas y la primera consulta puede tardar. |
+
+**Limitaciones del MVP (para el README):**
+- El contador de consultas está en memoria: se reinicia cuando Render duerme el servidor.
+- La IP se toma de una cabecera que un usuario avanzado podría falsear.
+- La conversación no se guarda: al recargar la página empieza de nuevo.
 
 ## Reparto del trabajo
 

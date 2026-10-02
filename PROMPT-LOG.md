@@ -232,3 +232,9 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** escribió `exportar.js`; el archivo se valida campo a campo antes de aceptarlo y, si ya hay datos, pide confirmación antes de sustituirlos.
 - **Yo:** probé a cargar un archivo que no era de Bolsillo y comprobé que mis datos no cambiaban.
 - **Resultado:** los datos se pueden llevar de un navegador a otro. Añadido `ejemplo/bolsillo-datos-ejemplo.json` para la demostración.
+
+### 11 · Etapas 9 y 10: Analista IA
+- **Pedí:** un analista que solo interprete las cifras ya calculadas, con la clave protegida y un límite de 20 consultas al día.
+- **IA:** consultó la documentación de Groq y recomendó `openai/gpt-oss-120b` (el modelo que suelen recomendar las guías, `llama-3.3-70b-versatile`, se retiró del plan gratuito en agosto de 2026); escribió el endpoint `/api/analista` y la pantalla del chat.
+- **Yo:** confirmé con `probar_groq.py` que el modelo responde con mi clave, y probé en la pantalla el resumen, una pregunta normal y un cálculo que no está en el panel.
+- **Resultado:** el analista responde con las cifras del panel y, si se le pide un cálculo nuevo, contesta con la frase fija de «versión MVP».

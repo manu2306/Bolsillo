@@ -99,6 +99,48 @@ const Calculos = (function () {
     };
   }
 
+  // El mismo resumen, preparado para el Analista IA: con nombres claros, todas las diferencias ya calculadas
+  // y las cantidades ya escritas como texto ("1.200 €", "+9,6 %"), para que la IA las copie tal cual
+  // y nunca tenga que hacer cuentas. "f" trae las funciones de formato de comun.js.
+  function resumenParaAnalista(datos, mes, f) {
+    const r = resumen(datos, mes);
+    const pct = function (v) { return v === null ? "no se puede calcular" : f.porcentaje(v); };
+    const uso = function (v) { return v === null ? "sin presupuesto" : v + " %"; };
+    return {
+      mes: f.mes(r.mes),
+      mesAnterior: f.mes(r.mesAnterior),
+      hayDatos: r.ingresos > 0 || r.gastos > 0,
+      ingresosDelMes: f.euros(r.ingresos),
+      detalleDeIngresos: r.conceptos.map(function (c) {
+        return { concepto: c.concepto, monto: f.euros(c.monto), motivo: c.motivo || "ninguno" };
+      }),
+      ingresosDelMesAnterior: f.euros(r.anterior.ingresos),
+      diferenciaDeIngresos: f.euros(sumar([r.ingresos, -r.anterior.ingresos])),
+      gastosFijos: f.euros(r.fijos),
+      gastosVariables: f.euros(r.variables),
+      gastosTotales: f.euros(r.gastos),
+      gastosTotalesDelMesAnterior: f.euros(r.anterior.gastos),
+      diferenciaDeGastos: f.euros(r.diferencia),
+      variacionDeGastos: pct(r.variacion),
+      // Si se gasta más de lo que se ingresa no "sobra" nada: se envía cuánto falta, ya calculado
+      sobra: r.sobra >= 0 ? f.euros(r.sobra) : "nada",
+      gastadoPorEncimaDelIngreso: r.sobra < 0 ? f.euros(-r.sobra) : "nada",
+      sobraSobreElIngreso: r.sobraPorcentaje === null || r.sobra < 0 ? "no se aplica" : r.sobraPorcentaje + " %",
+      secciones: r.secciones.map(function (s) {
+        return {
+          nombre: s.nombre,
+          tipo: s.tipo,
+          gastoDelMes: f.euros(s.actual),
+          gastoDelMesAnterior: f.euros(s.anterior),
+          diferencia: f.euros(sumar([s.actual, -s.anterior])),
+          cambio: pct(s.cambio),
+          presupuestoMensual: s.presupuesto ? f.euros(s.presupuesto) : "sin presupuesto",
+          presupuestoUsado: uso(s.uso),
+        };
+      }),
+    };
+  }
+
   // Ingresos y gastos de los últimos "cuantos" meses, terminando en "mes"
   function serie(datos, mes, cuantos) {
     const lista = [];
@@ -118,5 +160,5 @@ const Calculos = (function () {
     return maximo;
   }
 
-  return { sumar, montoFijo, fijasDelMes, variables, gastosDelMes, gastoDeSeccion, totales, cambio, mesAnterior, resumen, serie, topeEje };
+  return { sumar, montoFijo, fijasDelMes, variables, gastosDelMes, gastoDeSeccion, totales, cambio, mesAnterior, resumen, resumenParaAnalista, serie, topeEje };
 })();

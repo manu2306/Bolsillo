@@ -14,6 +14,7 @@ Quién detectó cada error es la clave para el criterio «dirigir bien a la IA»
 | 8 | Diseño | **Error de la IA de diseño (Claude Design):** en móvil, los campos del bloque «Nueva sección» quedaban estrechos y pegados a la derecha. | **La IA de desarrollo**, al revisar capturas de la etapa 6 y compararlas con el diseño original. | Los campos ocupan todo el ancho, como el resto de formularios. |
 | 9 | 7 | En el Panel, la leyenda del anillo mezclaba las secciones reales con las de ejemplo del diseño, y «Cuánto sobra» perdía su color verde. | **La IA, antes de entregar**: cargó en la app los mismos datos de ejemplo del diseño y comparó las dos imágenes píxel a píxel (107.000 píxeles distintos). | Tras corregirlo: 0 píxeles distintos en móvil y 267 en escritorio (el «58 %» ya no se parte en dos líneas). Captura en `capturas/etapa7-*`. |
 | 10 | 8 | Al cargar dos veces seguidas el mismo archivo, la segunda vez no ocurría nada: el navegador no avisa si el archivo elegido es el mismo. | **La IA, antes de entregar**, con una prueba automática que cargaba el mismo archivo dos veces. | El selector de archivos se vacía después de cada carga. |
+| 11 | 10 | **Error de la IA de Groq, por instrucciones insuficientes de la IA de desarrollo:** el «Resumen del mes» llegó en un solo párrafo en lugar de 3 observaciones, hablaba de forma impersonal («Los ingresos del mes fueron…») y escribía «1200 euros» en vez de «1.200 €». | **Yo**, con la primera prueba real y una captura de pantalla; la IA de desarrollo no podía probarlo porque no tiene mi clave. | Tres cambios: las cantidades viajan ya escritas («1.200 €») para que la IA las copie; se pide la respuesta en formato JSON con 3 observaciones; y, si aun así llega un párrafo, el servidor lo parte por frases. |
 
 ## Incidencias que no fueron errores de la IA
 
@@ -21,3 +22,9 @@ Quién detectó cada error es la clave para el criterio «dirigir bien a la IA»
 - **Etapa 1:** al abrir las páginas con doble clic (`file:///`), Chrome muestra un aviso de seguridad al cerrar el menú móvil. Es una limitación de `file:///` y desaparece cuando el servidor sirve las páginas.
 - **Etapa 2:** marqué el paso como hecho sin abrir las páginas. La IA lo detectó porque el registro de uvicorn no tenía ninguna línea `GET`, y repetimos las comprobaciones.
 - **Etapa 3:** escribí en PowerShell unas líneas que eran de JavaScript. La IA me explicó la diferencia entre PowerShell y la consola del navegador (F12).
+
+## Riesgos que se evitaron comprobando
+
+- **Modelo de Groq retirado.** Muchas guías y muchas IA recomiendan `llama-3.3-70b-versatile`. La IA consultó la documentación oficial en lugar de responder de memoria: ese modelo se retiró del plan gratuito el 16 de agosto de 2026. Después lo confirmé yo con una llamada real (`probar_groq.py`).
+- **Límite de consultas compartido.** En Render todos los visitantes llegan a través de un intermediario y parecerían la misma IP: el límite de 20 sería para todos juntos. Se usa la cabecera `X-Forwarded-For` para identificar a cada visitante.
+
