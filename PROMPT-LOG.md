@@ -1,6 +1,6 @@
 # PROMPT-LOG · Bolsillo
 
-Memoria breve de las sesiones con IA. El detalle para el informe final está en [`informe/`](informe/).
+Memoria breve de las sesiones con IA. La reflexión completa está en [`INFORME.md`](INFORME.md).
 
 ## Prompts iniciales
 
@@ -177,7 +177,7 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 ### 1 · Análisis del diseño y plan
 - **Pedí:** revisar el diseño, decir qué datos y endpoints hacen falta y proponer un plan por etapas.
 - **IA:** detectó que el diseño era una exportación empaquetada de 17 pantallas; propuso 3 endpoints y 5 preguntas.
-- **Yo:** decidí las 5 cuestiones abiertas (ver [`informe/decisiones.md`](informe/decisiones.md)).
+- **Yo:** decidí las 5 cuestiones abiertas (ver [`INFORME.md`](INFORME.md)).
 
 ### 2 · Etapa 0: preparación
 - **Pedí:** entorno virtual, librerías, `.gitignore`, `.env` y primer commit.
@@ -238,3 +238,15 @@ Adjunto el diseño en un único archivo HTML. Conéctalo sin rediseñarlo:
 - **IA:** consultó la documentación de Groq y recomendó `openai/gpt-oss-120b` (el modelo que suelen recomendar las guías, `llama-3.3-70b-versatile`, se retiró del plan gratuito en agosto de 2026); escribió el endpoint `/api/analista` y la pantalla del chat.
 - **Yo:** confirmé con `probar_groq.py` que el modelo responde con mi clave, y probé en la pantalla el resumen, una pregunta normal y un cálculo que no está en el panel.
 - **Resultado:** el analista responde con las cifras del panel y, si se le pide un cálculo nuevo, contesta con la frase fija de «versión MVP».
+
+### 12 · Etapa 12: preparar la publicación
+- **Pedí:** subir el proyecto a GitHub sin exponer la clave de Groq.
+- **IA:** fijó la versión de Python para Render y me dio comprobaciones previas a la subida.
+- **Yo:** GitHub bloqueó la subida porque había guardado por error la clave real en `.env.example`. Con la IA localicé el archivo (`git grep`), borramos la clave de todo el historial y comprobé que ya no aparecía en ningún commit.
+- **Resultado:** historial limpio y conservado, listo para publicar.
+
+### 13 · Documentación final
+- **Pedí:** un README y un informe de reflexión presentables, a partir de las notas de trabajo y de las sesiones.
+- **IA:** redactó `README.md` e `INFORME.md` y retiró la carpeta de notas.
+- **Yo:** revisé y ajusté los textos antes de publicarlos.
+
